@@ -1,0 +1,89 @@
+function outputFile = plotPohClimbEnvelope(sweep, saveFigure)
+%PLOTPOHCLIMBENVELOPE Plot POH climb rate and best-rate speed vs altitude.
+
+    if nargin < 2 || isempty(saveFigure)
+        saveFigure = false;
+    end
+
+    curveColors = [ ...
+        0.0000, 0.4470, 0.7410; ...
+        0.8500, 0.3250, 0.0980; ...
+        0.4660, 0.6740, 0.1880; ...
+        0.4940, 0.1840, 0.5560];
+
+    climbFigure = figure('Color', 'w', ...
+        'Name', 'POH Climb Performance', ...
+        'Position', [100, 100, 1250, 650]);
+    layout = tiledlayout(climbFigure, 1, 2, ...
+        'Padding', 'compact', 'TileSpacing', 'compact');
+
+    rocAxes = nexttile(layout, 1);
+    styleAxes(rocAxes);
+    hold(rocAxes, 'on');
+
+    for k = 1:numel(sweep.oatColumns_C)
+        plot(rocAxes, sweep.rateOfClimb_fpm(:, k), sweep.altitude_ft, ...
+            'Color', curveColors(k, :), 'LineWidth', 2.0, ...
+            'DisplayName', sprintf('OAT %+.0f C', sweep.oatColumns_C(k)));
+    end
+    plot(rocAxes, sweep.standardDayRateOfClimb_fpm, sweep.altitude_ft, ...
+        '--k', 'LineWidth', 2.4, 'DisplayName', 'Standard day');
+
+    xlabel(rocAxes, 'Maximum Rate of Climb (ft/min)', 'Color', 'k');
+    ylabel(rocAxes, 'Pressure Altitude (ft)', 'Color', 'k');
+    title(rocAxes, 'POH Maximum-Rate-Climb Envelope', 'Color', 'k');
+    ylim(rocAxes, [0, 12000]);
+    grid(rocAxes, 'on');
+    rocLegend = legend(rocAxes, 'Location', 'southwest');
+    styleLegend(rocLegend);
+
+    speedAxes = nexttile(layout, 2);
+    plot(speedAxes, sweep.climbSpeed_KIAS, sweep.altitude_ft, ...
+        'Color', [0.0000, 0.4470, 0.7410], 'LineWidth', 2.4);
+    % Apply theme-independent styling after the high-level plot call.
+    % MATLAB otherwise resets axes properties when NextPlot is 'replace'.
+    styleAxes(speedAxes);
+    xlabel(speedAxes, 'Best-Rate Climb Speed, V_Y (KIAS)', 'Color', 'k');
+    ylabel(speedAxes, 'Pressure Altitude (ft)', 'Color', 'k');
+    title(speedAxes, 'POH Best-Rate Climb Speed', 'Color', 'k');
+    ylim(speedAxes, [0, 12000]);
+    xlim(speedAxes, [70, 76]);
+    grid(speedAxes, 'on');
+
+    title(layout, ...
+        'Cessna 172S POH Climb Reference at 2550 lb', ...
+        'Color', 'k', 'FontWeight', 'bold');
+
+    outputFile = '';
+    if saveFigure
+        projectDirectory = fileparts(mfilename('fullpath'));
+        resultsDirectory = fullfile(projectDirectory, 'results');
+        if ~exist(resultsDirectory, 'dir')
+            mkdir(resultsDirectory);
+        end
+        outputFile = fullfile(resultsDirectory, ...
+            'poh_climb_envelope_2550lb.png');
+        exportgraphics(climbFigure, outputFile, ...
+            'Resolution', 300, 'BackgroundColor', 'white');
+    end
+end
+
+function styleAxes(ax)
+    set(ax, ...
+        'Color', 'w', ...
+        'XColor', 'k', ...
+        'YColor', 'k', ...
+        'GridColor', [0.75, 0.75, 0.75], ...
+        'GridAlpha', 0.45, ...
+        'FontName', 'Arial', ...
+        'FontSize', 11, ...
+        'LineWidth', 1.0, ...
+        'Box', 'on');
+end
+
+function styleLegend(legendHandle)
+    set(legendHandle, ...
+        'Color', 'w', ...
+        'TextColor', 'k', ...
+        'EdgeColor', [0.35, 0.35, 0.35]);
+end
