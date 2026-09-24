@@ -2,7 +2,7 @@
 
 ## Frozen checkpoint
 
-The Cessna 172S Performance Analysis Tool v1.0 candidate reports the following
+The Cessna 172S Performance Analysis Tool v1.0.0 reports the following
 complete MATLAB checkpoint:
 
 | Validation suite | Result | Principal scope |
@@ -85,8 +85,8 @@ performance.
 - [x] POH and analytical results remain separately classified.
 - [x] README and reference traceability match the 174-check checkpoint.
 - [x] Deferred features are documented rather than silently assumed.
-- [ ] Re-run `runAllValidations` after installing the final changed files.
+- [x] Re-run `runAllValidations` after installing the final changed files.
 
-The final unchecked item is the installation-side confirmation after the small
-presentation/documentation update. No numerical model equations or POH datasets
-were changed during that update.
+The final installation-side confirmation reproduced the complete **174/174 PASS**
+checkpoint. No numerical model equations or POH datasets were changed during the
+presentation/documentation update.

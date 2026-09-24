@@ -5,8 +5,8 @@ performance. The project combines published Pilot's Operating Handbook (POH)
 references, first-principles equations, and explicitly labelled semi-empirical
 models. POH results remain primary whenever a published reference is available.
 
-**Release status:** v1.0 candidate — nine operating modes and 174/174 validation
-checks at the frozen project checkpoint.
+**Release status:** v1.0.0 — nine operating modes and **174/174 validation checks PASS**
+at the frozen project checkpoint.
 
 This is an educational and portfolio project. It is not approved for aircraft
 operation, dispatch, or operational flight planning.

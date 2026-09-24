@@ -1,0 +1,4 @@
+Candidate,Formula,Provenance,MeanEtaImplied,MinimumEtaImplied,MaximumEtaImplied,CubicHoldoutRMSE,MaximumLiftToDrag,BestGlideEstimate_KIAS,BestGlideErrorFrom68_kt
+Current conventional polar,"CD = 0.027 + k CL^2","Current engineering assumptions; not validated",0.68467398267519,0.633366509727144,0.744125985310986,0.00711927518049451,13.1838796311905,77.8903415817576,9.89034158175761
+External conventional comparison,"CD = 0.031 + k CL^2; e = 0.75, AR = 7.52","User-supplied secondary estimate; unverified comparison only",0.768094387974167,0.718189336451838,0.817865432679366,0.00761781629627787,11.9537355986559,76.3437399855436,8.34373998554358
+Haberkorn shifted polar,"CD = 0.033 + 0.035 (CL - 0.14)^2","Haberkorn TU Graz dissertation Figure A.10; constructed comparison, not Cessna flight-test validation",0.655394863496517,0.589738001126343,0.697582240662789,0.00395708342920912,16.9855909279958,66.3544158433254,-1.6455841566746
